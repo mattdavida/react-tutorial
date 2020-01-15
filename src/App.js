@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
-// import Radium, { StyleRoot } from 'radium';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -35,14 +34,14 @@ class App extends Component {
   }
 
   getClasses() {
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
-    return classes.join(' ');
+    return assignedClasses.join(' ');
   }
 
   getPersons() {
@@ -65,14 +64,16 @@ class App extends Component {
 
   render() {
     let persons = null;
+    let btnClasses = [classes.button];
     if (this.state.showPersons) {
       persons = this.getPersons();
+      btnClasses.push(classes.red);
     }
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a react app</h1>
         <p className={this.getClasses()}>this is really working</p>
-        <button className="button" onClick={this.togglePersonsHandler.bind(this)}>
+        <button className={btnClasses.join(' ')} onClick={this.togglePersonsHandler.bind(this)}>
           Toggle Persons
         </button>
         {persons}
